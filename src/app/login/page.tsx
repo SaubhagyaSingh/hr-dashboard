@@ -43,7 +43,7 @@ export default function LoginPage() {
     const res = await signIn("credentials", {
       email,
       password,
-      callbackUrl: "/",
+      callbackUrl: "/home",
       redirect: false,
     });
 
