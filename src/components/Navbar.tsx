@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
+import logo from "/public/logo.png"; 
 
 const navItems = [
-  { label: "Dashboard", href: "/dashboard" },
-  { label: "Bookmark", href: "/bookmark" },
-  { label: "Employee", href: "/employee" },
+  { label: "Home", href: "/home" },
+  { label: "Bookmarks", href: "/bookmark" }, 
   { label: "Analytics", href: "/analytics" },
 ];
 
@@ -17,9 +18,12 @@ export default function Navbar() {
     <nav className="w-full bg-primary-dark text-peach shadow-md dark:shadow-card-dark/40">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="text-xl font-semibold tracking-tight">
-          mysite
-        </Link>
+        <div className="flex items-center gap-2">
+          <Image src={logo} alt="Logo" width={32} height={32} className="rounded-xl" />
+          <Link href="/" className="text-xl font-semibold tracking-tight">
+            CORE HR
+          </Link>
+        </div>
 
         {/* Navigation Links */}
         <div className="flex space-x-6 text-sm font-medium">
