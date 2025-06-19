@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import EmpCard from "@/components/EmpCard";
 import FilterSection from "@/components/FilterSection";
 import { useState } from "react";
+import { Bookmark } from "lucide-react";
 
 const employees = [
   {
@@ -13,6 +14,7 @@ const employees = [
     department: "Finance",
     rating: 4,
     avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+    bookmark:false,
   },
   {
     name: "Ravi Singh",
@@ -21,6 +23,8 @@ const employees = [
     department: "Engineering",
     rating: 5,
     avatar: "https://randomuser.me/api/portraits/men/76.jpg",
+    bookmark:false,
+
   },
   {
     name: "Maria Lopez",
@@ -29,6 +33,8 @@ const employees = [
     department: "HR",
     rating: 3,
     avatar: "https://randomuser.me/api/portraits/women/55.jpg",
+    bookmark:false,
+
   },
   {
     name: "John Doe",
@@ -37,6 +43,8 @@ const employees = [
     department: "Sales",
     rating: 4,
     avatar: "https://randomuser.me/api/portraits/men/65.jpg",
+    bookmark:false,
+
   },
   {
     name: "Sarah Ahmed",
@@ -45,6 +53,8 @@ const employees = [
     department: "Marketing",
     rating: 2,
     avatar: "https://randomuser.me/api/portraits/women/62.jpg",
+    bookmark:false,
+
   },
   {
     name: "Dev Patel",
@@ -53,6 +63,8 @@ const employees = [
     department: "Engineering",
     rating: 5,
     avatar: "https://randomuser.me/api/portraits/men/52.jpg",
+    bookmark:false,
+
   },
 ];
 

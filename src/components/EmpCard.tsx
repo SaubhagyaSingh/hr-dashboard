@@ -1,15 +1,15 @@
-"use client";
-
+import { useState } from "react";
+import { Star, Eye, ArrowUp, Bookmark } from "lucide-react";
 import Image from "next/image";
-import { Star } from "lucide-react";
 
-type EmpCardProps = {
+type Props = {
   name: string;
   email: string;
   age: number;
   department: string;
   rating: number;
-  avatar: string; // avatar image url
+  avatar: string;
+  bookmark: boolean;
 };
 
 export default function EmpCard({
@@ -19,55 +19,66 @@ export default function EmpCard({
   department,
   rating,
   avatar,
-}: EmpCardProps) {
+  bookmark,
+}: Props) {
+  const [bookmarked, setBookmarked] = useState(bookmark);
+
+  const handleBookmarkToggle = () => {
+    setBookmarked((prev) => !prev);
+  };
+
   return (
-    <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 p-5 w-full max-w-sm flex flex-col gap-4">
-      {/* Image + Info */}
+    <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition p-5 w-full max-w-sm">
       <div className="flex items-center gap-4">
-        <div className="w-16 h-16 rounded-md overflow-hidden bg-gray-100 shadow">
+        <div className="w-16 h-16 relative rounded-md overflow-hidden border shadow">
           <Image
             src={avatar}
-            alt={`${name} avatar`}
-            width={64}
-            height={64}
-            className="object-cover w-full h-full"
+            alt={name}
+            fill
+            className="object-cover"
+            sizes="64px"
           />
         </div>
-
-        <div>
+        <div className="flex-1">
           <h2 className="text-lg font-semibold text-gray-800">{name}</h2>
           <p className="text-sm text-gray-500">{email}</p>
+          <p className="text-sm text-gray-600">
+            {age} yrs · {department}
+          </p>
         </div>
+
+        {/* Single Icon with Conditional Fill */}
+        <button
+          onClick={handleBookmarkToggle}
+          className="text-accent-rose hover:text-peach transition"
+          title={bookmarked ? "Remove Bookmark" : "Bookmark"}
+        >
+          <Bookmark
+            fill={bookmarked ? "#fffff" : "none"} // Accent color fill when bookmarked
+            className="w-6 h-6"
+          />
+        </button>
       </div>
 
-      {/* Meta Info */}
-      <div className="flex justify-between text-sm text-gray-600">
-        <span>Age: {age}</span>
-        <span>Dept: {department}</span>
-      </div>
-
-      {/* Performance */}
-      <div className="flex items-center gap-1">
-        {Array.from({ length: 5 }, (_, i) => (
+      {/* Rating */}
+      <div className="flex items-center gap-1 mt-4">
+        {[...Array(5)].map((_, i) => (
           <Star
             key={i}
-            className={`w-5 h-5 ${
-              i < rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
+            className={`w-4 h-4 ${
+              i < rating ? "text-yellow-400" : "text-gray-300"
             }`}
+            fill={i < rating ? "#facc15" : "none"}
           />
         ))}
-        <span className="ml-2 text-sm text-gray-500">Performance</span>
       </div>
 
-      {/* Actions */}
-      <div className="flex gap-2 pt-2">
-        <button className="flex-1 px-3 py-1 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition shadow">
+      {/* Buttons */}
+      <div className="mt-4 flex justify-between gap-2">
+        <button className="text-sm px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
           View
         </button>
-        <button className="flex-1 px-3 py-1 rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300 transition shadow">
-          Bookmark
-        </button>
-        <button className="flex-1 px-3 py-1 rounded-md bg-green-600 text-white hover:bg-green-700 transition shadow">
+        <button className="text-sm px-3 py-1 bg-emerald-500 text-white rounded hover:bg-emerald-600 transition">
           Promote
         </button>
       </div>
