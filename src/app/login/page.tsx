@@ -55,8 +55,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-300 dark:from-pink-900 dark:to-gray-800 flex items-center justify-center px-4 transition-colors duration-300">
-      <div className="w-full max-w-md p-8 bg-white dark:bg-gray-950 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-800 transition-all duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-300 dark:from-pink-900 dark:to-gray-800 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
+      <div className="w-full max-w-md sm:max-w-lg bg-white dark:bg-gray-950 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-800 p-6 sm:p-8 transition-all duration-300">
         <div className="flex justify-center mb-6">
           <Image
             src="/logo.png"
@@ -68,7 +68,7 @@ export default function LoginPage() {
           />
         </div>
 
-        <h2 className="text-3xl font-extrabold text-center text-gray-800 dark:text-white mb-1">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-center text-gray-800 dark:text-white mb-1">
           Log In
         </h2>
         <p className="text-sm text-center text-gray-600 dark:text-gray-400 mb-6">

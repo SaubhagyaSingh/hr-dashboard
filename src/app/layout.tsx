@@ -1,9 +1,8 @@
 import "./globals.css";
 import { ClientProviders } from "@/components/ClientProviders";
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body>
         <ClientProviders>{children}</ClientProviders>
       </body>
