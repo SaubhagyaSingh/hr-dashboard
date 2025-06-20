@@ -33,11 +33,6 @@ export default function SignUpModal({
       alert("Please fill in all fields.");
       return;
     }
-
-    console.log("SignUp data:", formData);
-
-    // TODO: Add backend signup logic here
-
     onClose();
     router.push("/login");
   };

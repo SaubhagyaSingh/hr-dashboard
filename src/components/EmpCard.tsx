@@ -5,17 +5,9 @@ import { Star, Bookmark } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEmployeeContext } from "@/context/EmployeeContext";
+import { EmpProps } from "@/types/generaltypes";
 
-type Props = {
-  id: string;
-  name: string;
-  email: string;
-  age: number;
-  department: string;
-  rating: number;
-  avatar: string;
-  bookmark: boolean;
-};
+
 
 export default function EmpCard({
   id,
@@ -26,7 +18,7 @@ export default function EmpCard({
   rating,
   avatar,
   bookmark,
-}: Props) {
+}: EmpProps) {
   const { toggleBookmark } = useEmployeeContext();
   const router = useRouter();
 

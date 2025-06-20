@@ -14,7 +14,6 @@ export default function LoginPage() {
   const [formError, setFormError] = useState("");
   const [inputErrors, setInputErrors] = useState({ email: "", password: "" });
 
-  // Redirect already logged in users to /home
   useEffect(() => {
     if (status === "authenticated") {
       router.replace("/home");

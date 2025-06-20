@@ -1,16 +1,10 @@
 "use client";
 
+import { EmpCardInfo } from "@/types/generaltypes";
 import { Star } from "lucide-react";
 import Image from "next/image";
 
-type Props = {
-  name: string;
-  bio: string;
-  address: string;
-  phone: string;
-  avgRating: number;
-  avatar: string;
-};
+
 
 const StarRating = ({ rating }: { rating: number }) => (
   <div className="flex items-center gap-1">
@@ -32,7 +26,7 @@ export default function EmployeeInfoCard({
   phone,
   avgRating,
   avatar,
-}: Props) {
+}: EmpCardInfo) {
   return (
     <div className="mt-24 min-h-[620px] bg-white dark:bg-zinc-900 text-gray-900 dark:text-gray-100 shadow-lg rounded-2xl p-16 col-span-1 flex flex-col items-center text-center border border-gray-200 dark:border-zinc-700 transition-colors duration-300">
       {/* 🖼️ Avatar */}

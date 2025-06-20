@@ -8,7 +8,7 @@ import logo from "/public/logo.png";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import LogoutButton from "./Logout";
-import { useSession } from "next-auth/react"; // 🔁 Import here
+import { useSession } from "next-auth/react";
 
 const navItems = [
   { label: "Home", href: "/home" },
@@ -19,7 +19,7 @@ const navItems = [
 export default function Navbar() {
   const pathname = usePathname();
   const { systemTheme, theme, setTheme } = useTheme();
-  const { status } = useSession(); // 🔁 Grab session status
+  const { status } = useSession();
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);

@@ -1,12 +1,9 @@
 "use client";
 
+import { FilterSectionProps } from "@/types/generaltypes";
 import { useState } from "react";
 
-type FilterSectionProps = {
-  departments: string[];
-  onSearch: (query: string) => void;
-  onFilterChange: (selected: string[]) => void;
-};
+
 
 export default function FilterSection({
   departments,
@@ -19,7 +16,7 @@ export default function FilterSection({
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchQuery(value);
-    onSearch(value); // now sending case-sensitive value as-is
+    onSearch(value);
   };
 
   const handleCheckboxChange = (dept: string) => {

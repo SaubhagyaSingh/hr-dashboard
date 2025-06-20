@@ -1,28 +1,7 @@
 "use client";
 
+import { Employee } from "@/types/generaltypes";
 import { createContext, useContext, useState, ReactNode } from "react";
-
-export type Performance = {
-  year: number;
-  rating: number;
-};
-
-export type Employee = {
-  id: string;
-  name: string;
-  email: string;
-  age: number;
-  department: string;
-  rating: number;
-  avatar: string;
-  bookmark: boolean;
-  address: string;
-  phone: string;
-  bio: string;
-  performance: Performance[];
-  projects: string[];
-  feedback: string[];
-};
 
 type EmployeeContextType = {
   employees: Employee[];
@@ -42,14 +21,11 @@ export const useEmployeeContext = () => {
 export const EmployeeProvider = ({ children }: { children: ReactNode }) => {
   const [employees, setEmployees] = useState<Employee[]>([]);
 
-  // 🔁 Update employee by ID with partial data
   const updateEmployee = (id: string, newData: Partial<Employee>) => {
     setEmployees((prev) =>
       prev.map((emp) => (emp.id === id ? { ...emp, ...newData } : emp))
     );
   };
-
-  // ⭐ Toggle bookmark
   const toggleBookmark = (id: string) => {
     setEmployees((prev) =>
       prev.map((emp) =>
