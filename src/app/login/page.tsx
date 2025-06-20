@@ -55,8 +55,20 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-300 dark:from-pink-900 dark:to-gray-800 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
-      <div className="w-full max-w-md sm:max-w-lg bg-white dark:bg-gray-950 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-800 p-6 sm:p-8 transition-all duration-300">
+    <div
+      className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12"
+      style={{
+        background: "var(--primary-bg-gradient)",
+        color: "var(--foreground)",
+      }}
+    >
+      <div
+        className="w-full max-w-md sm:max-w-lg rounded-2xl shadow-xl border p-6 sm:p-8 transition-all duration-300"
+        style={{
+          backgroundColor: "var(--background)",
+          borderColor: "var(--primary-button-border)",
+        }}
+      >
         <div className="flex justify-center mb-6">
           <Image
             src="/logo.png"
@@ -68,16 +80,16 @@ export default function LoginPage() {
           />
         </div>
 
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-center text-gray-800 dark:text-white mb-1">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-center mb-1">
           Log In
         </h2>
-        <p className="text-sm text-center text-gray-600 dark:text-gray-400 mb-6">
+        <p className="text-sm text-center mb-6 text-gray-600 dark:text-gray-400">
           CORE HR: Your Way to Keep Things Organized
         </p>
 
         <form onSubmit={handleLogin} className="space-y-5">
           <div>
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+            <label className="text-sm font-medium">Email</label>
             <input
               type="email"
               placeholder="admin@hr.com"
@@ -95,7 +107,7 @@ export default function LoginPage() {
           </div>
 
           <div>
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+            <label className="text-sm font-medium">Password</label>
             <input
               type="password"
               placeholder="••••••••"
@@ -118,7 +130,12 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 text-white font-semibold py-2 rounded-lg transition"
+            className="w-full py-2 rounded-lg font-semibold transition"
+            style={{
+              backgroundColor: "var(--primary-button-bg)",
+              color: "var(--primary-button-text)",
+              border: "2px solid var(--primary-button-border)",
+            }}
           >
             Sign In
           </button>

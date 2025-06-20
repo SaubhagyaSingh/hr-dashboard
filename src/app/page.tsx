@@ -3,8 +3,9 @@
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import ImageCarousel from "@/components/ImageCarousel";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SignUpModal from "@/components/SignUpModal";
+import { useTheme } from "next-themes";
 
 const images = [
   "/assets/banner/img1.png",
@@ -14,10 +15,24 @@ const images = [
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { theme, systemTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  const currentTheme = theme === "system" ? systemTheme : theme;
+
+  if (!mounted) return null;
 
   return (
-    <div className="bg-white text-zinc-900 min-h-screen">
-      <Navbar/>
+    <div
+      style={{
+        backgroundColor: "var(--background)",
+        color: "var(--foreground)",
+      }}
+      className="min-h-screen transition-colors duration-300"
+    >
+      <Navbar />
 
       <main className="w-full px-4 md:px-6 py-36 flex flex-col md:flex-row items-center justify-center gap-12">
         {/* Carousel Left */}
@@ -36,24 +51,37 @@ export default function Home() {
             insightful.
           </p>
 
-          <div className="text-black flex sm:flex-row items-center sm:justify-start gap-4 p-4 m-4">
-            <button
-        onClick={() => setIsModalOpen(true)}
-              className="px-5 py-2 rounded-md bg-accent-rose text-black border-2 border-black font-medium hover:bg-gray-300 transition"
-            >
-              Sign Up
-            </button>
-            <Link
-              href="/login"
-              className="px-5 py-2 rounded-md bg-accent-rose text-black border-2 border-black font-medium hover:bg-gray-300 transition"
-            >
-              Login
-            </Link>
+          <div className="flex sm:flex-row items-center sm:justify-start gap-4 p-4 m-4">
+          <button
+  onClick={() => setIsModalOpen(true)}
+  className="px-5 py-2 rounded-md border-2 font-medium transition-all duration-300"
+  style={{
+    backgroundColor: "var(--primary-button)",
+    color: "var(--foreground)",
+    borderColor: "var(--foreground)",
+  }}
+>
+  Sign Up
+</button>
+
+<div   className="px-5 py-2 rounded-md border-2 font-medium transition-all duration-300" style={{
+    backgroundColor: "var(--primary-button)",
+    color: "var(--foreground)",
+    borderColor: "var(--foreground)",
+  }}>
+
+<Link
+  href="/login"
+>
+  Login
+</Link>
+</div>
+
           </div>
         </div>
       </main>
-      <SignUpModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
+      <SignUpModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 }

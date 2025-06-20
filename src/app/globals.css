@@ -1,1 +1,27 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: white;
+  --foreground: black;
+
+  --primary-bg-gradient: linear-gradient(to bottom right, #59849c,#eea3ee);
+  --primary-button-bg: white;
+  --primary-button-text: black;
+  --primary-button-border: black;
+  --primary-bg-black: #ffffff;
+}
+
+[data-theme='dark'],
+.dark {
+  --background: black;
+  --foreground: white;
+
+  --primary-bg-gradient: linear-gradient(to bottom , #1f2937, #7b1b7b); /* from-pink-900 to-gray-800 */
+  --primary-button-bg: #040513;
+  --primary-button-text: white;
+  --primary-button-border: white;
+  --primary-bg-black: #040513;
+}
