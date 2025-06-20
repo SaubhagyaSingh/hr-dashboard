@@ -67,7 +67,6 @@ export default function Home() {
 
       <div className="px-6 py-24">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
-          {/* Filter Area */}
           <div
             className="w-full md:w-1/3 rounded-xl shadow-md p-6"
             style={{
@@ -83,8 +82,6 @@ export default function Home() {
               onFilterChange={(selected) => setFilters(selected)}
             />
           </div>
-
-          {/* Employee List */}
           <div
             className="w-full md:w-2/3 rounded-xl shadow-md p-6 min-h-[360px] flex flex-col justify-between"
             style={{
@@ -112,7 +109,6 @@ export default function Home() {
                   )}
                 </div>
 
-                {/* Pagination */}
                 {totalPages > 1 && (
                   <div className="mt-6 flex justify-center items-center gap-4">
                     <button

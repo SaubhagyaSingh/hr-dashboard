@@ -65,7 +65,6 @@ export default function EmpCard({
         </button>
       </div>
 
-      {/* Rating */}
       <div className="flex items-center gap-1 mt-4">
         {[...Array(5)].map((_, i) => (
           <Star
@@ -78,7 +77,6 @@ export default function EmpCard({
         ))}
       </div>
 
-      {/* Action Buttons */}
       <div className="mt-4 flex justify-between gap-2">
         <button
           onClick={handleView}

@@ -19,7 +19,7 @@
   --background: black;
   --foreground: white;
 
-  --primary-bg-gradient: linear-gradient(to bottom , #1f2937, #7b1b7b); /* from-pink-900 to-gray-800 */
+  --primary-bg-gradient: linear-gradient(to bottom , #1f2937, #7b1b7b);
   --primary-button-bg: #040513;
   --primary-button-text: white;
   --primary-button-border: white;

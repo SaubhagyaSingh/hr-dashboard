@@ -104,7 +104,6 @@ export default function LoginPage() {
         </p>
 
         <form onSubmit={handleLogin} className="space-y-5">
-          {/* Email */}
           <div>
             <label className="text-sm font-medium">Email</label>
             <input
@@ -124,7 +123,6 @@ export default function LoginPage() {
             )}
           </div>
 
-          {/* Password */}
           <div>
             <label className="text-sm font-medium">Password</label>
             <input
@@ -144,8 +142,7 @@ export default function LoginPage() {
             )}
           </div>
 
-          {/* Form Error */}
-          {formError && (
+=          {formError && (
             <p className="text-sm text-center text-red-600 font-medium">{formError}</p>
           )}
 

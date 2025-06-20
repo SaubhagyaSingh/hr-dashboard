@@ -123,7 +123,6 @@ export default function AnalyticsPage() {
           Analytics Dashboard
         </h1>
 
-        {/* Filter Dropdown */}
         <div className="mb-10 flex flex-col sm:flex-row justify-between items-center gap-4">
           <label className="font-semibold text-base sm:text-lg">
             Filter by Department:
@@ -145,9 +144,7 @@ export default function AnalyticsPage() {
           </select>
         </div>
 
-        {/* Chart Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Pie Chart */}
           <div
             className="col-span-1 p-6 sm:p-8 md:p-10 shadow-lg rounded-xl h-[500px] sm:h-[550px]"
             style={{ backgroundColor: "var(--primary-bg-black)" }}
@@ -160,7 +157,6 @@ export default function AnalyticsPage() {
             </div>
           </div>
 
-          {/* Tabs for Line & Bar Charts */}
           <div
             className="col-span-1 lg:col-span-2 p-6 sm:p-8 md:p-10 shadow-lg rounded-xl h-[500px] sm:h-[550px]"
             style={{ backgroundColor: "var(--primary-bg-black)" }}

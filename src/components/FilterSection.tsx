@@ -38,7 +38,6 @@ export default function FilterSection({
         color: "var(--foreground)",
       }}
     >
-      {/* Search Bar */}
       <div className="mb-4">
         <input
         autoCapitalize="off"
@@ -56,7 +55,6 @@ export default function FilterSection({
         />
       </div>
 
-      {/* Filters */}
       <div>
         <h3 className="text-md font-semibold mb-2">Filter by Department</h3>
         <div className="flex flex-wrap gap-4">

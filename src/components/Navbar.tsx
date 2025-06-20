@@ -41,7 +41,6 @@ export default function Navbar() {
       }}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 h-16 flex items-center justify-between">
-        {/* Left: Logo + Links */}
         <div className="flex items-center gap-8">
           <div className="flex items-center gap-2">
             <Image
@@ -76,9 +75,8 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Right: Logout + Theme Toggle */}
         <div className="flex items-center gap-4">
-          {status === "authenticated" && <LogoutButton />} {/* ✅ Conditional */}
+          {status === "authenticated" && <LogoutButton />} 
           <button
             onClick={() =>
               setTheme(currentTheme === "dark" ? "light" : "dark")

@@ -17,7 +17,6 @@ export default function ImageCarousel({ images }: Props) {
 
   return (
     <div className="relative w-full aspect-[16/9] overflow-hidden rounded-lg shadow-lg">
-      {/* Image Display */}
       <div className="relative w-full h-full">
         <Image
           src={images[current]}
@@ -28,7 +27,6 @@ export default function ImageCarousel({ images }: Props) {
         />
       </div>
 
-      {/* Left Arrow */}
       <button
         onClick={prev}
         className="absolute top-1/2 left-4 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full z-10"
@@ -36,7 +34,6 @@ export default function ImageCarousel({ images }: Props) {
         <ChevronLeft />
       </button>
 
-      {/* Right Arrow */}
       <button
         onClick={next}
         className="absolute top-1/2 right-4 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full z-10"
@@ -44,7 +41,6 @@ export default function ImageCarousel({ images }: Props) {
         <ChevronRight />
       </button>
 
-      {/* Dots */}
       <div className="absolute bottom-3 w-full flex justify-center gap-2 z-10">
         {images.map((_, idx) => (
           <div

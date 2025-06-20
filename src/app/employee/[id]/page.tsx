@@ -50,7 +50,6 @@ export default function EmployeeDetailPage() {
     >
       <Navbar />
       <div className="max-w-8xl mx-auto p-6 py-24 grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Left Card */}
         <EmployeeInfoCard
           name={user.name}
           bio={user.bio}
@@ -60,7 +59,6 @@ export default function EmployeeDetailPage() {
           avatar={user.avatar}
         />
 
-        {/* Right Tabs */}
         <div className="col-span-1 md:col-span-2">
           <Tabs.Root value={activeTab} onValueChange={setActiveTab}>
             <Tabs.List className="flex gap-4 border-b mb-4">

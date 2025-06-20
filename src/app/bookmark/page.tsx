@@ -45,7 +45,6 @@ export default function BookmarkedEmployees() {
 
       <div className="px-6 py-24">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
-          {/* Filter Section */}
           <div
             className="w-full md:w-1/3 rounded-xl shadow-md p-6 min-h-[360px]"
             style={{ backgroundColor: "var(--primary-bg-black)" }}

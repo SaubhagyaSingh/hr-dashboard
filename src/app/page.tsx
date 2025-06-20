@@ -35,12 +35,10 @@ export default function Home() {
       <Navbar />
 
       <main className="w-full px-4 md:px-6 py-36 flex flex-col md:flex-row items-center justify-center gap-12">
-        {/* Carousel Left */}
         <div className="w-full md:w-1/2">
           <ImageCarousel images={images} />
         </div>
 
-        {/* Text Right */}
         <div className="w-full md:w-1/2 max-w-xl space-y-6 text-center md:text-left">
           <h1 className="text-3xl md:text-4xl font-bold text-peach">
             Welcome to Core HR Platform
