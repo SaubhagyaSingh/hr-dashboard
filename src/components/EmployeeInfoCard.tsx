@@ -1,6 +1,7 @@
 "use client";
 
 import { Star } from "lucide-react";
+import Image from "next/image";
 
 type Props = {
   name: string;
@@ -8,6 +9,7 @@ type Props = {
   address: string;
   phone: string;
   avgRating: number;
+  avatar: string; // 🆕 Added avatar
 };
 
 const StarRating = ({ rating }: { rating: number }) => (
@@ -23,20 +25,45 @@ const StarRating = ({ rating }: { rating: number }) => (
   </div>
 );
 
-export default function EmployeeInfoCard({ name, bio, address, phone, avgRating }: Props) {
+export default function EmployeeInfoCard({
+  name,
+  bio,
+  address,
+  phone,
+  avgRating,
+  avatar,
+}: Props) {
   return (
-    <div className="bg-white shadow-lg rounded-2xl p-6 col-span-1">
-      <h1 className="text-2xl font-bold mb-2">{name}</h1>
+    <div className="mt-24 min-h-[620px] bg-white shadow-lg rounded-2xl p-16 col-span-1 flex flex-col items-center text-center">
+      {/* 🖼️ Avatar */}
+      <div className="w-24 h-24 mb-4 relative rounded-2xl overflow-hidden border-2 border-gray-300 shadow-md">
+        <Image
+          src={avatar}
+          alt={name}
+          fill
+          className="object-cover"
+          sizes="96px"
+        />
+      </div>
+
+      {/* 🧑 Name + Bio */}
+      <h1 className="text-xl font-bold mb-1">{name}</h1>
       <p className="text-sm text-gray-600 mb-4">{bio}</p>
-      <div className="mb-4">
+
+      {/* 📍 Address */}
+      <div className="mb-2">
         <h2 className="font-semibold">📍 Address</h2>
-        <p className="text-gray-700">{address}</p>
+        <p className="text-gray-700 text-sm">{address}</p>
       </div>
-      <div className="mb-4">
+
+      {/* 📞 Phone */}
+      <div className="mb-2">
         <h2 className="font-semibold">📞 Phone</h2>
-        <p className="text-gray-700">{phone}</p>
+        <p className="text-gray-700 text-sm">{phone}</p>
       </div>
-      <div>
+
+      {/* ⭐ Rating */}
+      <div className="mt-2">
         <h2 className="font-semibold">⭐ Avg Rating</h2>
         <StarRating rating={avgRating} />
       </div>

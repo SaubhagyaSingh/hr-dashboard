@@ -115,14 +115,16 @@ export default function AnalyticsPage() {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
 
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold mb-12 text-center">Analytics Dashboard</h1>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-12 text-center">
+          Analytics Dashboard
+        </h1>
 
         {/* Filter Dropdown */}
         <div className="mb-10 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <label className="font-semibold text-lg">Filter by Department:</label>
+          <label className="font-semibold text-base sm:text-lg">Filter by Department:</label>
           <select
-            className="border border-gray-300 rounded-md px-4 py-2 text-sm"
+            className="border border-gray-300 rounded-md px-4 py-2 text-sm sm:text-base"
             value={departmentFilter}
             onChange={(e) => setDepartmentFilter(e.target.value)}
           >
@@ -137,39 +139,41 @@ export default function AnalyticsPage() {
         {/* Chart Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Pie Chart */}
-          <div className="col-span-1 bg-white p-10 shadow-lg rounded-xl h-[550px]">
-            <h2 className="text-2xl font-semibold mb-6 text-center">Employee Distribution</h2>
-            <div className="h-[450px]">
+          <div className="col-span-1 bg-white p-6 sm:p-8 md:p-10 shadow-lg rounded-xl h-[500px] sm:h-[550px]">
+            <h2 className="text-xl sm:text-2xl font-semibold mb-6 text-center">
+              Employee Distribution
+            </h2>
+            <div className="h-[380px] sm:h-[450px]">
               <EmployeePieChart data={pieChartData} />
             </div>
           </div>
 
           {/* Tabs for Line & Bar Charts */}
-          <div className="col-span-1 lg:col-span-2 bg-white p-10 shadow-lg rounded-xl h-[550px]">
+          <div className="col-span-1 lg:col-span-2 bg-white p-6 sm:p-8 md:p-10 shadow-lg rounded-xl h-[500px] sm:h-[550px]">
             <Tabs.Root value={activeTab} onValueChange={setActiveTab}>
               <Tabs.List className="flex gap-4 justify-center mb-6">
                 <Tabs.Trigger
                   value="bookmarks"
-                  className="px-4 py-2 border-b-2 data-[state=active]:border-blue-600"
+                  className="px-4 py-2 border-b-2 text-sm sm:text-base data-[state=active]:border-blue-600"
                 >
                   Bookmarks
                 </Tabs.Trigger>
                 <Tabs.Trigger
                   value="ratings"
-                  className="px-4 py-2 border-b-2 data-[state=active]:border-blue-600"
+                  className="px-4 py-2 border-b-2 text-sm sm:text-base data-[state=active]:border-blue-600"
                 >
                   Department Ratings
                 </Tabs.Trigger>
               </Tabs.List>
 
               <Tabs.Content value="bookmarks">
-                <div className="h-[450px]">
+                <div className="h-[380px] sm:h-[450px]">
                   <BookmarkLineChart data={lineChartData} />
                 </div>
               </Tabs.Content>
 
               <Tabs.Content value="ratings">
-                <div className="h-[450px]">
+                <div className="h-[380px] sm:h-[450px]">
                   <DepartmentBarChart data={barChartData} />
                 </div>
               </Tabs.Content>
