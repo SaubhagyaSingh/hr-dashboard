@@ -9,7 +9,7 @@ type Props = {
   address: string;
   phone: string;
   avgRating: number;
-  avatar: string; // 🆕 Added avatar
+  avatar: string;
 };
 
 const StarRating = ({ rating }: { rating: number }) => (
@@ -18,7 +18,7 @@ const StarRating = ({ rating }: { rating: number }) => (
       <Star
         key={i}
         size={16}
-        className={i < rating ? "text-yellow-500" : "text-gray-300"}
+        className={i < rating ? "text-yellow-500" : "text-gray-300 dark:text-gray-600"}
         fill={i < rating ? "#facc15" : "none"}
       />
     ))}
@@ -34,9 +34,9 @@ export default function EmployeeInfoCard({
   avatar,
 }: Props) {
   return (
-    <div className="mt-24 min-h-[620px] bg-white shadow-lg rounded-2xl p-16 col-span-1 flex flex-col items-center text-center">
+    <div className="mt-24 min-h-[620px] bg-white dark:bg-zinc-900 text-gray-900 dark:text-gray-100 shadow-lg rounded-2xl p-16 col-span-1 flex flex-col items-center text-center border border-gray-200 dark:border-zinc-700 transition-colors duration-300">
       {/* 🖼️ Avatar */}
-      <div className="w-24 h-24 mb-4 relative rounded-2xl overflow-hidden border-2 border-gray-300 shadow-md">
+      <div className="w-24 h-24 mb-4 relative rounded-2xl overflow-hidden border-2 border-gray-300 dark:border-zinc-600 shadow-md">
         <Image
           src={avatar}
           alt={name}
@@ -48,18 +48,18 @@ export default function EmployeeInfoCard({
 
       {/* 🧑 Name + Bio */}
       <h1 className="text-xl font-bold mb-1">{name}</h1>
-      <p className="text-sm text-gray-600 mb-4">{bio}</p>
+      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{bio}</p>
 
       {/* 📍 Address */}
       <div className="mb-2">
         <h2 className="font-semibold">📍 Address</h2>
-        <p className="text-gray-700 text-sm">{address}</p>
+        <p className="text-sm text-gray-700 dark:text-gray-300">{address}</p>
       </div>
 
       {/* 📞 Phone */}
       <div className="mb-2">
         <h2 className="font-semibold">📞 Phone</h2>
-        <p className="text-gray-700 text-sm">{phone}</p>
+        <p className="text-sm text-gray-700 dark:text-gray-300">{phone}</p>
       </div>
 
       {/* ⭐ Rating */}

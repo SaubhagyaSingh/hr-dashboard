@@ -28,21 +28,20 @@ export default function EmpCard({
   bookmark,
 }: Props) {
   const { toggleBookmark } = useEmployeeContext();
-    const router = useRouter();
+  const router = useRouter();
 
-    const handleBookmarkToggle = () => {
-      toggleBookmark(id);
-    };
-    
+  const handleBookmarkToggle = () => {
+    toggleBookmark(id);
+  };
 
   const handleView = () => {
     router.push(`/employee/${id}`);
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition p-5 w-full max-w-sm">
+    <div className="bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-neutral-700 rounded-xl shadow-md hover:shadow-lg transition p-5 w-full max-w-sm">
       <div className="flex items-center gap-4">
-        <div className="w-16 h-16 relative rounded-md overflow-hidden border shadow">
+        <div className="w-16 h-16 relative rounded-md overflow-hidden border shadow-sm dark:border-gray-600">
           <Image
             src={avatar}
             alt={name}
@@ -52,24 +51,26 @@ export default function EmpCard({
           />
         </div>
         <div className="flex-1">
-          <h2 className="text-lg font-semibold text-gray-800">{name}</h2>
-          <p className="text-sm text-gray-500">{email}</p>
-          <p className="text-sm text-gray-600">
+          <h2 className="text-lg font-semibold">{name}</h2>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{email}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-300">
             {age} yrs · {department}
           </p>
         </div>
 
         <button
-  onClick={handleBookmarkToggle}
-  className="text-accent-rose hover:text-peach transition"
-  title={bookmark ? "Remove Bookmark" : "Bookmark"}
->
-  <Bookmark
-    className={`w-6 h-6 ${bookmark ? "fill-current text-black" : "text-gray-400"}`}
-  />
-</button>
-
-
+          onClick={handleBookmarkToggle}
+          className="text-accent-rose hover:text-peach transition"
+          title={bookmark ? "Remove Bookmark" : "Bookmark"}
+        >
+          <Bookmark
+            className={`w-6 h-6 ${
+              bookmark
+                ? "fill-current text-black dark:text-white"
+                : "text-gray-400 dark:text-gray-500"
+            }`}
+          />
+        </button>
       </div>
 
       {/* Rating */}
@@ -77,7 +78,9 @@ export default function EmpCard({
         {[...Array(5)].map((_, i) => (
           <Star
             key={i}
-            className={`w-4 h-4 ${i < rating ? "text-yellow-400" : "text-gray-300"}`}
+            className={`w-4 h-4 ${
+              i < rating ? "text-yellow-400" : "text-gray-300 dark:text-gray-600"
+            }`}
             fill={i < rating ? "#facc15" : "none"}
           />
         ))}

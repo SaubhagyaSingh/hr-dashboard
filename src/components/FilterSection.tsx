@@ -19,7 +19,7 @@ export default function FilterSection({
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchQuery(value);
-    onSearch(value);
+    onSearch(value); // now sending case-sensitive value as-is
   };
 
   const handleCheckboxChange = (dept: string) => {
@@ -34,7 +34,13 @@ export default function FilterSection({
   };
 
   return (
-    <div className="bg-white rounded-xl shadow p-6 w-full max-w-3xl mx-auto mb-6">
+    <div
+      className="rounded-xl shadow p-6 w-full max-w-3xl mx-auto mb-6 transition-colors duration-300"
+      style={{
+        backgroundColor: "var(--primary-bg-black)",
+        color: "var(--foreground)",
+      }}
+    >
       {/* Search Bar */}
       <div className="mb-4">
         <input
@@ -42,16 +48,21 @@ export default function FilterSection({
           placeholder="Search by name, department..."
           value={searchQuery}
           onChange={handleSearchChange}
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 border"
+          style={{
+            backgroundColor: "transparent",
+            color: "var(--foreground)",
+            borderColor: "var(--foreground)",
+          }}
         />
       </div>
 
       {/* Filters */}
       <div>
-        <h3 className="text-md font-semibold text-gray-700 mb-2">Filter by Department</h3>
+        <h3 className="text-md font-semibold mb-2">Filter by Department</h3>
         <div className="flex flex-wrap gap-4">
           {departments.map((dept) => (
-            <label key={dept} className="flex items-center gap-2 text-sm text-gray-600">
+            <label key={dept} className="flex items-center gap-2 text-sm">
               <input
                 type="checkbox"
                 checked={selectedFilters.includes(dept)}
