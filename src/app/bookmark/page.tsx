@@ -16,18 +16,19 @@ export default function BookmarkedEmployees() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const filteredEmployees = employees
-    .filter((emp) => emp.bookmark)
-    .filter((emp) => {
-      const matchesSearch =
-        emp.name.toLowerCase().includes(query.toLowerCase()) ||
-        emp.email.toLowerCase().includes(query.toLowerCase()) ||
-        emp.department.toLowerCase().includes(query.toLowerCase());
+  .filter((emp) => emp.bookmark)
+  .filter((emp) => {
+    const matchesSearch =
+      emp.name.startsWith(query) ||
+      emp.email.startsWith(query) ||
+      emp.department.startsWith(query);
 
-      const matchesDepartment =
-        filters.length === 0 || filters.includes(emp.department);
+    const matchesDepartment =
+      filters.length === 0 || filters.includes(emp.department);
 
-      return matchesSearch && matchesDepartment;
-    });
+    return matchesSearch && matchesDepartment;
+  });
+
 
   const totalPages = Math.ceil(filteredEmployees.length / itemsPerPage);
   const paginatedEmployees = filteredEmployees.slice(
@@ -63,7 +64,6 @@ export default function BookmarkedEmployees() {
             />
           </div>
 
-          {/* Employee Card Area */}
           <div
             className="w-full md:w-2/3 rounded-xl shadow-inner p-6 border flex flex-col justify-between min-h-[360px]"
             style={{
@@ -86,7 +86,6 @@ export default function BookmarkedEmployees() {
               </div>
             </div>
 
-            {/* Pagination */}
             {totalPages > 1 && (
               <div className="mt-8 flex justify-center gap-2">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (

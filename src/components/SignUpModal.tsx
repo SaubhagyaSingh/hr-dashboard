@@ -83,6 +83,8 @@ export default function SignUpModal({
 
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <input
+                    autoCapitalize="off"
+  autoCorrect="off"
                       type="text"
                       name="name"
                       placeholder="Full Name"
@@ -92,6 +94,8 @@ export default function SignUpModal({
                       className="w-full px-4 py-2 border rounded-md bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-white border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
                     />
                     <input
+                    autoCapitalize="off"
+  autoCorrect="off"
                       type="email"
                       name="email"
                       placeholder="Email"
@@ -101,6 +105,8 @@ export default function SignUpModal({
                       className="w-full px-4 py-2 border rounded-md bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-white border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
                     />
                     <input
+                    autoCapitalize="off"
+  autoCorrect="off"
                       type="password"
                       name="password"
                       placeholder="Password"

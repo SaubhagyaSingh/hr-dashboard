@@ -158,5 +158,21 @@
     "performance": [{ "year": 2022, "rating": 5 }, { "year": 2023, "rating": 5 }],
     "projects": ["Q4 Financials", "Automated Tax Reports"],
     "feedback": ["Highly dependable.", "Future leader."]
+  },
+  {
+    "id": "e11",
+    "name": "nikky Kapoor",
+    "email": "nikky.singh@example.com",
+    "age": 32,
+    "department": "Engineering",
+    "rating": 4,
+    "avatar": "https://randomuser.me/api/portraits/women/35.jpg",
+    "bookmark": true,
+    "address": "Sector 22, New Delhi, India",
+    "phone": "+91-9999128348",
+    "bio": "Nikky is an Engineering associate known for her coding skills and quick mind",
+    "performance": [{ "year": 2022, "rating": 3 }, { "year": 2023, "rating": 4 }],
+    "projects": ["Duke-Retainer", "FHC CPQ-APP"],
+    "feedback": ["Highly dependable.", "Future leader."]
   }
 ]

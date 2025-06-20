@@ -44,6 +44,8 @@ export default function FilterSection({
       {/* Search Bar */}
       <div className="mb-4">
         <input
+        autoCapitalize="off"
+  autoCorrect="off"
           type="text"
           placeholder="Search by name, department..."
           value={searchQuery}

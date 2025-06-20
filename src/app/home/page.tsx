@@ -42,9 +42,9 @@ export default function Home() {
 
   const filteredEmployees = employees.filter((emp) => {
     const matchesSearch =
-      emp.name.toLowerCase().includes(query.toLowerCase()) ||
-      emp.email.toLowerCase().includes(query.toLowerCase()) ||
-      emp.department.toLowerCase().includes(query.toLowerCase());
+      emp.name.startsWith(query) ||
+      emp.email.startsWith(query) ||
+      emp.department.startsWith(query);
 
     const matchesDepartment =
       filters.length === 0 || filters.includes(emp.department);

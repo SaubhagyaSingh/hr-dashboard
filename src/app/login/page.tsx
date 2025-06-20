@@ -91,6 +91,8 @@ export default function LoginPage() {
           <div>
             <label className="text-sm font-medium">Email</label>
             <input
+            autoCapitalize="off"
+  autoCorrect="off"
               type="email"
               placeholder="test@gmail.com"
               className={`mt-1 w-full px-4 py-2 border rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-white focus:outline-none focus:ring-2 transition duration-200 ${
@@ -109,6 +111,8 @@ export default function LoginPage() {
           <div>
             <label className="text-sm font-medium">Password</label>
             <input
+            autoCapitalize="off"
+  autoCorrect="off"
               type="password"
               placeholder="••••••••"
               className={`mt-1 w-full px-4 py-2 border rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-white focus:outline-none focus:ring-2 transition duration-200 ${
