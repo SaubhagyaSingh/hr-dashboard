@@ -1,36 +1,137 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+CORE HR Dashboard
+A modern, theme-aware HR Dashboard built with Next.js 15, TailwindCSS, NextAuth.js, and React Context API. This dashboard provides a user-friendly interface for managing employee data, featuring search, filtering, bookmarking, and analytics.
 
-## Getting Started
+📦 Tech Stack
 
-First, run the development server:
+Next.js 15 (App Router)
+React 19
+Tailwind CSS 4 (with PostCSS)
+NextAuth.js (Credential-based authentication)
+React Context API (Global state management)
+Lucide React Icons (Icon library)
+Chart.js + react-chartjs-2 (Data visualization)
+Radix UI & Headless UI (Accessible UI components)
+next-themes (Dark/Light theme toggle)
+Excalidraw (App structure diagram)
 
-```bash
+
+🚀 Features
+
+🔐 Secure Authentication: Credential-based login (test@gmail.com / test123)
+🌙 Theme Support: Light/Dark mode with toggle
+🔎 Search & Filter: Filter employees by name, email, or department
+📚 Bookmark Employees: Save and view bookmarked employees in a dedicated tab
+📊 Analytics Dashboard: Visualize employee data with Chart.js
+⛔ Protected Routes: Secured with NextAuth middleware
+🌐 Persistent Login: JWT-based session management
+🧠 Global State: Managed via React Context API
+🧾 Excalidraw Diagram: Visualize app structure and flow
+
+
+📁 Project Structure
+hr-dashboard/
+├── src/
+│   ├── app/                    # App Router pages (login, home, bookmark, analytics)
+│   ├── components/             # Reusable components (Navbar, EmpCard, FilterSection, LogoutButton, etc.)
+│   ├── context/                # EmployeeContext.tsx for global state management
+│   └── data/                   # Static JSON data for employees
+├── public/
+│   └── logo.png                # App logo
+├── middleware.ts               # NextAuth middleware for route protection
+├── .env                        # Environment variables
+├── next.config.ts              # Next.js configuration
+├── tailwind.config.js          # Tailwind CSS configuration
+├── postcss.config.mjs          # PostCSS configuration
+├── tsconfig.json               # TypeScript configuration
+├── excalidraw.excalidraw       # Excalidraw diagram for app structure
+├── package.json                # Project dependencies
+└── README.md                   # Project documentation
+
+
+🔧 Installation & Setup
+
+Clone the repository:
+git clone https://github.com/your-username/hr-dashboard.git
+cd hr-dashboard
+
+
+Install dependencies:
+npm install
+
+
+Set up environment variables:Create a .env file in the root directory:
+touch .env
+
+Add the following:
+NEXTAUTH_SECRET=your_strong_secret_here
+
+Generate a secure secret:
+openssl rand -base64 32
+
+
+Run the application:
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app will be available at http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+🧪 Demo Credentials
 
-To learn more about Next.js, take a look at the following resources:
+Email: test@gmail.com
+Password: test123
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+🛡 Route Protection
+Routes are protected using middleware.ts. Only the following routes are publicly accessible:
 
-## Deploy on Vercel
+/ (Landing page)
+/login (Login screen)
+/api/* (API routes)
+/_next/*, /favicon.ico (Static assets)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+All other routes (/home, /bookmark, /analytics) redirect to /login if the user is not authenticated.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+Route
+Description
+
+
+
+/
+Landing page
+
+
+/login
+Login screen with validation
+
+
+/home
+List of all employees
+
+
+/bookmark
+View bookmarked employees
+
+
+/analytics
+Employee analytics with charts
+
+
+
+🧩 Excalidraw Diagram
+An excalidraw.excalidraw file is included in the root directory. To view the app's structure and flow:
+
+Visit Excalidraw.
+Import the excalidraw.excalidraw file.
+
+
+📝 Notes
+
+Ensure the NEXTAUTH_SECRET is set in the .env file for secure authentication.
+The app uses static JSON data in src/data/ for demo purposes. Replace with a real database for production.
+Tailwind CSS is configured with PostCSS for optimal styling.
+
+
+Built with ❤️ by Saubhagya Singh
