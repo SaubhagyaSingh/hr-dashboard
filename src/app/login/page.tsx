@@ -1,14 +1,25 @@
 "use client";
 
-import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 export default function LoginPage() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [formError, setFormError] = useState("");
   const [inputErrors, setInputErrors] = useState({ email: "", password: "" });
+
+  // Redirect already logged in users to /home
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.replace("/home");
+    }
+  }, [status]);
 
   const validate = () => {
     let valid = true;
@@ -48,15 +59,23 @@ export default function LoginPage() {
     });
 
     if (res?.ok) {
-      window.location.href = res.url || "/";
+      window.location.href = res.url || "/home";
     } else {
       setFormError("Invalid email or password");
     }
   };
 
+  if (status === "loading") {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p>Checking session...</p>
+      </div>
+    );
+  }
+
   return (
     <div
-      className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12"
+      className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 transition-colors duration-300"
       style={{
         background: "var(--primary-bg-gradient)",
         color: "var(--foreground)",
@@ -80,20 +99,18 @@ export default function LoginPage() {
           />
         </div>
 
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-center mb-1">
-          Log In
-        </h2>
-        <p className="text-sm text-center mb-6 text-gray-700 dark:text-gray-500">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-center mb-1">Log In</h2>
+        <p className="text-sm text-center mb-6 text-gray-700 dark:text-gray-400">
           CORE HR: Your Way to Keep Things Organized
         </p>
 
         <form onSubmit={handleLogin} className="space-y-5">
+          {/* Email */}
           <div>
             <label className="text-sm font-medium">Email</label>
             <input
-            autoCapitalize="off"
-  autoCorrect="off"
               type="email"
+              autoComplete="off"
               placeholder="test@gmail.com"
               className={`mt-1 w-full px-4 py-2 border rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-white focus:outline-none focus:ring-2 transition duration-200 ${
                 inputErrors.email
@@ -108,12 +125,12 @@ export default function LoginPage() {
             )}
           </div>
 
+          {/* Password */}
           <div>
             <label className="text-sm font-medium">Password</label>
             <input
-            autoCapitalize="off"
-  autoCorrect="off"
               type="password"
+              autoComplete="off"
               placeholder="••••••••"
               className={`mt-1 w-full px-4 py-2 border rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-white focus:outline-none focus:ring-2 transition duration-200 ${
                 inputErrors.password
@@ -128,6 +145,7 @@ export default function LoginPage() {
             )}
           </div>
 
+          {/* Form Error */}
           {formError && (
             <p className="text-sm text-center text-red-600 font-medium">{formError}</p>
           )}
@@ -145,7 +163,7 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-gray-700 dark:text-gray-500">
+        <p className="mt-6 text-center text-sm text-gray-700 dark:text-gray-400">
           Demo login → <span className="font-medium">test@gmail.com</span> /{" "}
           <span className="font-medium">test123</span>
         </p>

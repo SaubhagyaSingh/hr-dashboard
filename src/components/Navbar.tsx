@@ -7,6 +7,7 @@ import { Moon, Sun } from "lucide-react";
 import logo from "/public/logo.png";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import LogoutButton from "./Logout";
 
 const navItems = [
   { label: "Home", href: "/home" },
@@ -71,6 +72,7 @@ export default function Navbar() {
               </Link>
             ))}
           </div>
+          <div><LogoutButton></LogoutButton></div>
         </div>
 
         <div>
