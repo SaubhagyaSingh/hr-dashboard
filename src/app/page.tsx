@@ -3,6 +3,8 @@
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import ImageCarousel from "@/components/ImageCarousel";
+import { useState } from "react";
+import SignUpModal from "@/components/SignUpModal";
 
 const images = [
   "/assets/banner/img1.png",
@@ -11,6 +13,8 @@ const images = [
 ];
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="bg-white text-zinc-900 min-h-screen">
       <Navbar/>
@@ -33,12 +37,12 @@ export default function Home() {
           </p>
 
           <div className="text-black flex sm:flex-row items-center sm:justify-start gap-4 p-4 m-4">
-            <Link
-              href="/login"
+            <button
+        onClick={() => setIsModalOpen(true)}
               className="px-5 py-2 rounded-md bg-accent-rose text-black border-2 border-black font-medium hover:bg-gray-300 transition"
             >
               Sign Up
-            </Link>
+            </button>
             <Link
               href="/login"
               className="px-5 py-2 rounded-md bg-accent-rose text-black border-2 border-black font-medium hover:bg-gray-300 transition"
@@ -48,6 +52,8 @@ export default function Home() {
           </div>
         </div>
       </main>
+      <SignUpModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
     </div>
   );
 }
