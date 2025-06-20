@@ -1,6 +1,8 @@
 CORE HR Dashboard
 A modern, theme-aware HR Dashboard built with Next.js 15, TailwindCSS, NextAuth.js, and React Context API. This dashboard provides a user-friendly interface for managing employee data, featuring search, filtering, bookmarking, and analytics.
 
+Visit the site at :https://hr-dashboard-uswt.vercel.app/
+
 📦 Tech Stack
 
 Next.js 15 (App Router)
