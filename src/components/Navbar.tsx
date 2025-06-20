@@ -8,6 +8,7 @@ import logo from "/public/logo.png";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import LogoutButton from "./Logout";
+import { useSession } from "next-auth/react"; // 🔁 Import here
 
 const navItems = [
   { label: "Home", href: "/home" },
@@ -18,11 +19,11 @@ const navItems = [
 export default function Navbar() {
   const pathname = usePathname();
   const { systemTheme, theme, setTheme } = useTheme();
+  const { status } = useSession(); // 🔁 Grab session status
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  // Only render UI after component has mounted (to avoid hydration mismatch)
   if (!mounted) return null;
 
   const currentTheme = theme === "system" ? systemTheme : theme;
@@ -40,7 +41,8 @@ export default function Navbar() {
       }}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-10">
+        {/* Left: Logo + Links */}
+        <div className="flex items-center gap-8">
           <div className="flex items-center gap-2">
             <Image
               src={logo}
@@ -57,7 +59,7 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <div className="flex space-x-4 text-sm font-medium">
+          <div className="flex gap-6 text-sm font-medium">
             {navItems.map(({ label, href }) => (
               <Link
                 key={href}
@@ -72,10 +74,11 @@ export default function Navbar() {
               </Link>
             ))}
           </div>
-          <div><LogoutButton></LogoutButton></div>
         </div>
 
-        <div>
+        {/* Right: Logout + Theme Toggle */}
+        <div className="flex items-center gap-4">
+          {status === "authenticated" && <LogoutButton />} {/* ✅ Conditional */}
           <button
             onClick={() =>
               setTheme(currentTheme === "dark" ? "light" : "dark")
