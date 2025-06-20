@@ -15,7 +15,6 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // Pagination
   const itemsPerPage = 6;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -38,7 +37,7 @@ export default function Home() {
   }, [employees.length, setEmployees]);
 
   useEffect(() => {
-    setCurrentPage(1); // Reset to page 1 on filter/search change
+    setCurrentPage(1);
   }, [query, filters]);
 
   const filteredEmployees = employees.filter((emp) => {
@@ -60,14 +59,24 @@ export default function Home() {
   );
 
   return (
-    <div>
+    <div
+      className="min-h-screen transition-colors duration-300"
+      style={{ backgroundColor: "var(--background)", color: "var(--foreground)" }}
+    >
       <Navbar />
 
-      <div className="min-h-screen bg-gray-100 px-6 py-24">
+      <div className="px-6 py-24">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
           {/* Filter Area */}
-          <div className="w-full md:w-1/3 bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4 text-gray-800">Filter Employees</h2>
+          <div
+            className="w-full md:w-1/3 rounded-xl shadow-md p-6"
+            style={{
+              backgroundColor: "var(--primary-bg-black)",
+              color: "var(--foreground)",
+              border: "1px solid var(--primary-button-border)",
+            }}
+          >
+            <h2 className="text-xl font-semibold mb-4">Filter Employees</h2>
             <FilterSection
               departments={departments}
               onSearch={(val) => setQuery(val)}
@@ -75,11 +84,18 @@ export default function Home() {
             />
           </div>
 
-          {/* Employee Card Area */}
-          <div className="w-full md:w-2/3 bg-white rounded-xl shadow-md p-6 min-h-[360px] flex flex-col justify-between">
-          <h2 className="text-xl font-semibold mb-4 text-gray-800">Employee List</h2>
+          {/* Employee List */}
+          <div
+            className="w-full md:w-2/3 rounded-xl shadow-md p-6 min-h-[360px] flex flex-col justify-between"
+            style={{
+              backgroundColor: "var(--primary-bg-black)",
+              color: "var(--foreground)",
+              border: "1px solid var(--primary-button-border)",
+            }}
+          >
+            <h2 className="text-xl font-semibold mb-4">Employee List</h2>
             {loading ? (
-              <p className="text-gray-500">Loading employees...</p>
+              <p className="text-sm opacity-80">Loading employees...</p>
             ) : error ? (
               <p className="text-red-500">Error: {error}</p>
             ) : (
@@ -90,21 +106,28 @@ export default function Home() {
                       <EmpCard key={emp.id} {...emp} />
                     ))
                   ) : (
-                    <p className="text-gray-500">No employees match your filters.</p>
+                    <p className="text-sm opacity-80">
+                      No employees match your filters.
+                    </p>
                   )}
                 </div>
 
-                {/* Pagination Controls */}
+                {/* Pagination */}
                 {totalPages > 1 && (
                   <div className="mt-6 flex justify-center items-center gap-4">
                     <button
                       onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                       disabled={currentPage === 1}
-                      className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50"
+                      className="px-4 py-2 rounded border transition disabled:opacity-50"
+                      style={{
+                        backgroundColor: "transparent",
+                        color: "var(--foreground)",
+                        borderColor: "var(--primary-button-border)",
+                      }}
                     >
                       Prev
                     </button>
-                    <span className="text-sm text-gray-700">
+                    <span className="text-sm">
                       Page {currentPage} of {totalPages}
                     </span>
                     <button
@@ -112,7 +135,12 @@ export default function Home() {
                         setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                       }
                       disabled={currentPage === totalPages}
-                      className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50"
+                      className="px-4 py-2 rounded border transition disabled:opacity-50"
+                      style={{
+                        backgroundColor: "transparent",
+                        color: "var(--foreground)",
+                        borderColor: "var(--primary-button-border)",
+                      }}
                     >
                       Next
                     </button>

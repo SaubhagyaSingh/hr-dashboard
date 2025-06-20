@@ -83,7 +83,7 @@ export default function LoginPage() {
         <h2 className="text-2xl sm:text-3xl font-extrabold text-center mb-1">
           Log In
         </h2>
-        <p className="text-sm text-center mb-6 text-gray-600 dark:text-gray-400">
+        <p className="text-sm text-center mb-6 text-gray-700 dark:text-gray-500">
           CORE HR: Your Way to Keep Things Organized
         </p>
 
@@ -92,7 +92,7 @@ export default function LoginPage() {
             <label className="text-sm font-medium">Email</label>
             <input
               type="email"
-              placeholder="admin@hr.com"
+              placeholder="test@gmail.com"
               className={`mt-1 w-full px-4 py-2 border rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-white focus:outline-none focus:ring-2 transition duration-200 ${
                 inputErrors.email
                   ? "border-red-500 focus:ring-red-500"
@@ -141,9 +141,9 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
-          Demo login → <span className="font-medium">admin@hr.com</span> /{" "}
-          <span className="font-medium">admin123</span>
+        <p className="mt-6 text-center text-sm text-gray-700 dark:text-gray-500">
+          Demo login → <span className="font-medium">test@gmail.com</span> /{" "}
+          <span className="font-medium">test123</span>
         </p>
       </div>
     </div>

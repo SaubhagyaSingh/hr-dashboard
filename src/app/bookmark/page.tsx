@@ -36,14 +36,20 @@ export default function BookmarkedEmployees() {
   );
 
   return (
-    <div>
+    <div
+      className="min-h-screen transition-colors duration-300"
+      style={{ backgroundColor: "var(--background)", color: "var(--foreground)" }}
+    >
       <Navbar />
 
-      <div className="min-h-screen bg-gray-100 px-6 py-24">
+      <div className="px-6 py-24">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
           {/* Filter Section */}
-          <div className="w-full md:w-1/3 bg-white rounded-xl shadow-md p-6 min-h-[360px]">
-            <h2 className="text-xl font-semibold mb-4 text-gray-800">Filter Employees</h2>
+          <div
+            className="w-full md:w-1/3 rounded-xl shadow-md p-6 min-h-[360px]"
+            style={{ backgroundColor: "var(--primary-bg-black)" }}
+          >
+            <h2 className="text-xl font-semibold mb-4">Filter Employees</h2>
             <FilterSection
               departments={departments}
               onSearch={(val) => {
@@ -58,16 +64,24 @@ export default function BookmarkedEmployees() {
           </div>
 
           {/* Employee Card Area */}
-          <div className="w-full md:w-2/3 bg-slate-50 rounded-xl shadow-inner p-6 border border-gray-200 flex flex-col justify-between min-h-[360px]">
+          <div
+            className="w-full md:w-2/3 rounded-xl shadow-inner p-6 border flex flex-col justify-between min-h-[360px]"
+            style={{
+              backgroundColor: "var(--primary-bg-black)",
+              borderColor: "rgba(0, 0, 0, 0.1)",
+            }}
+          >
             <div>
-              <h2 className="text-xl font-semibold mb-4 text-gray-800">Bookmarked Employees</h2>
+              <h2 className="text-xl font-semibold mb-4">Bookmarked Employees</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
                 {paginatedEmployees.length > 0 ? (
                   paginatedEmployees.map((emp) => (
                     <EmpCard key={emp.id} {...emp} />
                   ))
                 ) : (
-                  <p className="text-gray-500">No bookmarked employees found.</p>
+                  <p className="text-gray-500 dark:text-gray-400">
+                    No bookmarked employees found.
+                  </p>
                 )}
               </div>
             </div>
@@ -79,10 +93,10 @@ export default function BookmarkedEmployees() {
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={`px-3 py-1 rounded ${
+                    className={`px-3 py-1 rounded border text-sm font-medium transition ${
                       page === currentPage
-                        ? "bg-blue-500 text-white"
-                        : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-100"
+                        ? "bg-blue-600 text-white"
+                        : "bg-transparent border-gray-400 text-gray-800 dark:text-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700"
                     }`}
                   >
                     {page}

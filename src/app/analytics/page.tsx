@@ -112,7 +112,10 @@ export default function AnalyticsPage() {
   }, [filteredEmployees]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div
+      className="min-h-screen transition-colors duration-300"
+      style={{ backgroundColor: "var(--background)", color: "var(--foreground)" }}
+    >
       <Navbar />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
@@ -122,9 +125,15 @@ export default function AnalyticsPage() {
 
         {/* Filter Dropdown */}
         <div className="mb-10 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <label className="font-semibold text-base sm:text-lg">Filter by Department:</label>
+          <label className="font-semibold text-base sm:text-lg">
+            Filter by Department:
+          </label>
           <select
-            className="border border-gray-300 rounded-md px-4 py-2 text-sm sm:text-base"
+            className="border rounded-md px-4 py-2 text-sm sm:text-base bg-transparent"
+            style={{
+              color: "var(--foreground)",
+              borderColor: "var(--foreground)",
+            }}
             value={departmentFilter}
             onChange={(e) => setDepartmentFilter(e.target.value)}
           >
@@ -139,7 +148,10 @@ export default function AnalyticsPage() {
         {/* Chart Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Pie Chart */}
-          <div className="col-span-1 bg-white p-6 sm:p-8 md:p-10 shadow-lg rounded-xl h-[500px] sm:h-[550px]">
+          <div
+            className="col-span-1 p-6 sm:p-8 md:p-10 shadow-lg rounded-xl h-[500px] sm:h-[550px]"
+            style={{ backgroundColor: "var(--primary-bg-black)" }}
+          >
             <h2 className="text-xl sm:text-2xl font-semibold mb-6 text-center">
               Employee Distribution
             </h2>
@@ -149,7 +161,10 @@ export default function AnalyticsPage() {
           </div>
 
           {/* Tabs for Line & Bar Charts */}
-          <div className="col-span-1 lg:col-span-2 bg-white p-6 sm:p-8 md:p-10 shadow-lg rounded-xl h-[500px] sm:h-[550px]">
+          <div
+            className="col-span-1 lg:col-span-2 p-6 sm:p-8 md:p-10 shadow-lg rounded-xl h-[500px] sm:h-[550px]"
+            style={{ backgroundColor: "var(--primary-bg-black)" }}
+          >
             <Tabs.Root value={activeTab} onValueChange={setActiveTab}>
               <Tabs.List className="flex gap-4 justify-center mb-6">
                 <Tabs.Trigger

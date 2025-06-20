@@ -14,7 +14,7 @@ const StarRating = ({ rating }: { rating: number }) => (
       <Star
         key={i}
         size={16}
-        className={i < rating ? "text-yellow-500" : "text-gray-300"}
+        className={i < rating ? "text-yellow-500" : "text-gray-400 dark:text-gray-700"}
         fill={i < rating ? "#facc15" : "none"}
       />
     ))}
@@ -28,7 +28,15 @@ export default function EmployeeDetailPage() {
 
   const [activeTab, setActiveTab] = useState("overview");
 
-  if (!user) return <div className="p-4">Loading employee...</div>;
+  if (!user)
+    return (
+      <div
+        className="min-h-screen flex items-center justify-center"
+        style={{ backgroundColor: "var(--background)", color: "var(--foreground)" }}
+      >
+        Loading employee...
+      </div>
+    );
 
   const avgRating =
     user.performance?.length > 0
@@ -36,7 +44,10 @@ export default function EmployeeDetailPage() {
       : 0;
 
   return (
-    <div>
+    <div
+      className="min-h-screen transition-colors duration-300"
+      style={{ backgroundColor: "var(--background)", color: "var(--foreground)" }}
+    >
       <Navbar />
       <div className="max-w-8xl mx-auto p-6 py-24 grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Left Card */}
@@ -48,19 +59,39 @@ export default function EmployeeDetailPage() {
           avgRating={avgRating}
           avatar={user.avatar}
         />
+
         {/* Right Tabs */}
         <div className="col-span-1 md:col-span-2">
           <Tabs.Root value={activeTab} onValueChange={setActiveTab}>
             <Tabs.List className="flex gap-4 border-b mb-4">
-              <Tabs.Trigger value="overview" className="pb-2 border-b-2 data-[state=active]:border-red-600">Overview</Tabs.Trigger>
-              <Tabs.Trigger value="projects" className="pb-2 border-b-2 data-[state=active]:border-green-600">Projects</Tabs.Trigger>
-              <Tabs.Trigger value="feedback" className="pb-2 border-b-2 data-[state=active]:border-blue-600">Feedback</Tabs.Trigger>
+              <Tabs.Trigger
+                value="overview"
+                className="pb-2 border-b-2 data-[state=active]:border-red-600"
+              >
+                Overview
+              </Tabs.Trigger>
+              <Tabs.Trigger
+                value="projects"
+                className="pb-2 border-b-2 data-[state=active]:border-green-600"
+              >
+                Projects
+              </Tabs.Trigger>
+              <Tabs.Trigger
+                value="feedback"
+                className="pb-2 border-b-2 data-[state=active]:border-blue-600"
+              >
+                Feedback
+              </Tabs.Trigger>
             </Tabs.List>
 
             <Tabs.Content value="overview">
               <div className="space-y-2">
                 {user.performance.map((p, i) => (
-                  <div key={i} className="flex justify-between bg-gray-50 p-2 rounded">
+                  <div
+                    key={i}
+                    className="flex justify-between p-2 rounded shadow-sm"
+                    style={{ backgroundColor: "var(--primary-bg-black)" }}
+                  >
                     <span>{p.year}</span>
                     <StarRating rating={p.rating} />
                   </div>
@@ -79,7 +110,13 @@ export default function EmployeeDetailPage() {
             <Tabs.Content value="feedback">
               <div className="space-y-2">
                 {user.feedback.map((fb, i) => (
-                  <div key={i} className="bg-white shadow rounded-xl p-3">{fb}</div>
+                  <div
+                    key={i}
+                    className="shadow rounded-xl p-3"
+                    style={{ backgroundColor: "var(--primary-bg-black)" }}
+                  >
+                    {fb}
+                  </div>
                 ))}
               </div>
             </Tabs.Content>
