@@ -1,36 +1,43 @@
-CORE HR Dashboard
-A modern, theme-aware HR Dashboard built with Next.js 15, TailwindCSS, NextAuth.js, and React Context API. This dashboard provides a user-friendly interface for managing employee data, featuring search, filtering, bookmarking, and analytics.
+# 🧑‍💼 CORE HR Dashboard
 
-Visit the site at :https://hr-dashboard-uswt.vercel.app/
+A modern, theme-aware HR Dashboard built with **Next.js 15**, **TailwindCSS**, **NextAuth.js**, and **React Context API**. This dashboard provides a user-friendly interface for managing employee data, featuring search, filtering, bookmarking, and analytics.
 
-📦 Tech Stack
+🔗 **Live Demo:** [https://hr-dashboard-uswt.vercel.app/](https://hr-dashboard-uswt.vercel.app/)
 
-Next.js 15 (App Router)
-React 19
-Tailwind CSS 4 (with PostCSS)
-NextAuth.js (Credential-based authentication)
-React Context API (Global state management)
-Lucide React Icons (Icon library)
-Chart.js + react-chartjs-2 (Data visualization)
-Radix UI & Headless UI (Accessible UI components)
-next-themes (Dark/Light theme toggle)
-Excalidraw (App structure diagram)
+---
+
+## 📦 Tech Stack
+
+- **Next.js 15 (App Router)**
+- **React 19**
+- **Tailwind CSS 4** (with PostCSS)
+- **NextAuth.js** (Credential-based authentication)
+- **React Context API** (Global state management)
+- **Lucide React Icons** (Icon library)
+- **Chart.js + react-chartjs-2** (Data visualization)
+- **Radix UI & Headless UI** (Accessible UI components)
+- **next-themes** (Dark/Light theme toggle)
+- **Excalidraw** (App structure diagram)
+
+---
+
+## 🚀 Features
+
+- 🔐 **Secure Authentication**: Credential-based login (`test@gmail.com` / `test123`)
+- 🌙 **Theme Support**: Light/Dark mode toggle
+- 🔎 **Search & Filter**: Filter employees by name, email, or department
+- 📚 **Bookmark Employees**: Save and view bookmarked employees in a dedicated tab
+- 📊 **Analytics Dashboard**: Visualize employee data with Chart.js
+- ⛔ **Protected Routes**: Secured with NextAuth middleware
+- 🌐 **Persistent Login**: JWT-based session management
+- 🧠 **Global State**: Managed via React Context API
+- 🧾 **Excalidraw Diagram**: Visualize app structure and flow
+
+---
+
+## 📁 Project Structure
 
 
-🚀 Features
-
-🔐 Secure Authentication: Credential-based login (test@gmail.com / test123)
-🌙 Theme Support: Light/Dark mode with toggle
-🔎 Search & Filter: Filter employees by name, email, or department
-📚 Bookmark Employees: Save and view bookmarked employees in a dedicated tab
-📊 Analytics Dashboard: Visualize employee data with Chart.js
-⛔ Protected Routes: Secured with NextAuth middleware
-🌐 Persistent Login: JWT-based session management
-🧠 Global State: Managed via React Context API
-🧾 Excalidraw Diagram: Visualize app structure and flow
-
-
-📁 Project Structure
 hr-dashboard/
 ├── src/
 │   ├── app/                    # App Router pages (login, home, bookmark, analytics)
