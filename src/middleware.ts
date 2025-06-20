@@ -24,14 +24,13 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-    matcher: [
-      /*
-        Match all routes except:
-        - /login and its subroutes
-        - / (homepage)
-        - static files (/_next, /favicon.ico etc.)
-      */
-      "/((?!_next|favicon.ico|login|api|$).*)",
-    ],
-  };
+  matcher: [
+    // Match all routes except:
+    // - /login and its subroutes
+    // - / (homepage)
+    // - static files (/favicon.ico, /_next, etc.)
+    "/((?!_next|favicon.ico|login|api|assets|$).*)",
+  ],
+};
+
   
