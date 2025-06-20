@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { Pie, Line, Bar } from "react-chartjs-2";
+import { useState, useMemo } from "react";
 import {
   Chart as ChartJS,
   ArcElement,
@@ -16,6 +15,10 @@ import {
 } from "chart.js";
 import * as Tabs from "@radix-ui/react-tabs";
 import Navbar from "@/components/Navbar";
+import EmployeePieChart from "@/components/EmployeePieChart";
+import BookmarkLineChart from "@/components/BookmarkLineChart";
+import DepartmentBarChart from "@/components/DepartmentBarChart";
+import { useEmployeeContext } from "@/context/EmployeeContext";
 
 ChartJS.register(
   ArcElement,
@@ -29,69 +32,122 @@ ChartJS.register(
   Title
 );
 
-// Mock data
-const employeeDistribution = {
-  labels: ["Engineering", "Marketing", "HR", "Finance", "Sales"],
-  datasets: [
-    {
-      label: "Employees",
-      data: [40, 15, 10, 20, 15],
-      backgroundColor: [
-        "#4f46e5",
-        "#facc15",
-        "#10b981",
-        "#f472b6",
-        "#60a5fa",
-      ],
-    },
-  ],
-};
-
-const bookmarkTrendData = {
-  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-  datasets: [
-    {
-      label: "Bookmarks",
-      data: [5, 8, 12, 10, 14, 18],
-      fill: false,
-      borderColor: "#4f46e5",
-      tension: 0.3,
-    },
-  ],
-};
-
-const departmentRatingData = {
-  labels: ["Engineering", "Marketing", "HR", "Finance", "Sales"],
-  datasets: [
-    {
-      label: "Avg Rating",
-      data: [4.5, 3.2, 3.8, 4.1, 3.5],
-      backgroundColor: "#60a5fa",
-    },
-  ],
-};
-
 export default function AnalyticsPage() {
   const [activeTab, setActiveTab] = useState("bookmarks");
+  const [departmentFilter, setDepartmentFilter] = useState("All");
+  const { employees } = useEmployeeContext();
+
+  const departments = useMemo(() => {
+    const set = new Set(employees.map((emp) => emp.department));
+    return ["All", ...Array.from(set)];
+  }, [employees]);
+
+  const filteredEmployees = useMemo(() => {
+    return departmentFilter === "All"
+      ? employees
+      : employees.filter((emp) => emp.department === departmentFilter);
+  }, [employees, departmentFilter]);
+
+  const pieChartData = useMemo(() => {
+    const departmentCounts: Record<string, number> = {};
+    filteredEmployees.forEach((emp) => {
+      departmentCounts[emp.department] = (departmentCounts[emp.department] || 0) + 1;
+    });
+
+    const labels = Object.keys(departmentCounts);
+    const data = labels.map((label) => departmentCounts[label]);
+    const colors = ["#4f46e5", "#facc15", "#10b981", "#f472b6", "#60a5fa", "#a78bfa"];
+
+    return {
+      labels,
+      datasets: [
+        {
+          label: "Employees",
+          data,
+          backgroundColor: colors.slice(0, labels.length),
+        },
+      ],
+    };
+  }, [filteredEmployees]);
+
+  const lineChartData = useMemo(() => {
+    return {
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      datasets: [
+        {
+          label: "Bookmarks",
+          data: [5, 8, 12, 10, 14, 18],
+          fill: false,
+          borderColor: "#4f46e5",
+          tension: 0.3,
+        },
+      ],
+    };
+  }, []);
+
+  const barChartData = useMemo(() => {
+    const ratingData: Record<string, number[]> = {};
+
+    filteredEmployees.forEach((emp) => {
+      if (!ratingData[emp.department]) ratingData[emp.department] = [];
+      ratingData[emp.department].push(emp.rating);
+    });
+
+    const labels = Object.keys(ratingData);
+    const data = labels.map(
+      (dep) =>
+        ratingData[dep].reduce((a, b) => a + b, 0) / ratingData[dep].length || 0
+    );
+
+    return {
+      labels,
+      datasets: [
+        {
+          label: "Avg Rating",
+          data,
+          backgroundColor: "#60a5fa",
+        },
+      ],
+    };
+  }, [filteredEmployees]);
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
 
-      <div className="max-w-7xl mx-auto px-4 py-10">
-        <h1 className="text-3xl font-bold mb-8 text-center">Analytics Dashboard</h1>
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        <h1 className="text-4xl font-bold mb-12 text-center">Analytics Dashboard</h1>
 
-        <div className="flex flex-col lg:flex-row gap-10 items-center lg:items-start">
+        {/* Filter Dropdown */}
+        <div className="mb-10 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <label className="font-semibold text-lg">Filter by Department:</label>
+          <select
+            className="border border-gray-300 rounded-md px-4 py-2 text-sm"
+            value={departmentFilter}
+            onChange={(e) => setDepartmentFilter(e.target.value)}
+          >
+            {departments.map((dept) => (
+              <option key={dept} value={dept}>
+                {dept}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Chart Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Pie Chart */}
-          <div className="w-full lg:w-1/3 bg-white p-6 shadow-lg rounded-xl">
-            <h2 className="text-xl font-semibold mb-4 text-center lg:text-left">Employee Distribution</h2>
-            <Pie data={employeeDistribution} />
+          <div className="col-span-1 bg-white p-10 shadow-lg rounded-xl h-[550px]">
+            <h2 className="text-2xl font-semibold mb-6 text-center">Employee Distribution</h2>
+            <div className="h-[450px]">
+              <EmployeePieChart data={pieChartData} />
+            </div>
           </div>
 
           {/* Tabs for Line & Bar Charts */}
-          <div className="w-full lg:w-2/3 bg-white p-6 shadow-lg rounded-xl">
+          <div className="col-span-1 lg:col-span-2 bg-white p-10 shadow-lg rounded-xl h-[550px]">
             <Tabs.Root value={activeTab} onValueChange={setActiveTab}>
-              <Tabs.List className="flex gap-4 justify-center lg:justify-start mb-6">
+              <Tabs.List className="flex gap-4 justify-center mb-6">
                 <Tabs.Trigger
                   value="bookmarks"
                   className="px-4 py-2 border-b-2 data-[state=active]:border-blue-600"
@@ -107,11 +163,15 @@ export default function AnalyticsPage() {
               </Tabs.List>
 
               <Tabs.Content value="bookmarks">
-                <Line data={bookmarkTrendData} />
+                <div className="h-[450px]">
+                  <BookmarkLineChart data={lineChartData} />
+                </div>
               </Tabs.Content>
 
               <Tabs.Content value="ratings">
-                <Bar data={departmentRatingData} />
+                <div className="h-[450px]">
+                  <DepartmentBarChart data={barChartData} />
+                </div>
               </Tabs.Content>
             </Tabs.Root>
           </div>

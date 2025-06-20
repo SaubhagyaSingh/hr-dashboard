@@ -1,8 +1,13 @@
+"use client";
+
 import { useState } from "react";
-import { Star, Eye, ArrowUp, Bookmark } from "lucide-react";
+import { Star, Bookmark } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEmployeeContext } from "@/context/EmployeeContext";
 
 type Props = {
+  id: string;
   name: string;
   email: string;
   age: number;
@@ -13,6 +18,7 @@ type Props = {
 };
 
 export default function EmpCard({
+  id,
   name,
   email,
   age,
@@ -21,10 +27,16 @@ export default function EmpCard({
   avatar,
   bookmark,
 }: Props) {
-  const [bookmarked, setBookmarked] = useState(bookmark);
+  const { toggleBookmark } = useEmployeeContext();
+    const router = useRouter();
 
-  const handleBookmarkToggle = () => {
-    setBookmarked((prev) => !prev);
+    const handleBookmarkToggle = () => {
+      toggleBookmark(id);
+    };
+    
+
+  const handleView = () => {
+    router.push(`/employee/${id}`);
   };
 
   return (
@@ -47,17 +59,17 @@ export default function EmpCard({
           </p>
         </div>
 
-        {/* Single Icon with Conditional Fill */}
         <button
-          onClick={handleBookmarkToggle}
-          className="text-accent-rose hover:text-peach transition"
-          title={bookmarked ? "Remove Bookmark" : "Bookmark"}
-        >
-          <Bookmark
-            fill={bookmarked ? "#fffff" : "none"} // Accent color fill when bookmarked
-            className="w-6 h-6"
-          />
-        </button>
+  onClick={handleBookmarkToggle}
+  className="text-accent-rose hover:text-peach transition"
+  title={bookmark ? "Remove Bookmark" : "Bookmark"}
+>
+  <Bookmark
+    className={`w-6 h-6 ${bookmark ? "fill-current text-black" : "text-gray-400"}`}
+  />
+</button>
+
+
       </div>
 
       {/* Rating */}
@@ -65,17 +77,18 @@ export default function EmpCard({
         {[...Array(5)].map((_, i) => (
           <Star
             key={i}
-            className={`w-4 h-4 ${
-              i < rating ? "text-yellow-400" : "text-gray-300"
-            }`}
+            className={`w-4 h-4 ${i < rating ? "text-yellow-400" : "text-gray-300"}`}
             fill={i < rating ? "#facc15" : "none"}
           />
         ))}
       </div>
 
-      {/* Buttons */}
+      {/* Action Buttons */}
       <div className="mt-4 flex justify-between gap-2">
-        <button className="text-sm px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
+        <button
+          onClick={handleView}
+          className="text-sm px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+        >
           View
         </button>
         <button className="text-sm px-3 py-1 bg-emerald-500 text-white rounded hover:bg-emerald-600 transition">

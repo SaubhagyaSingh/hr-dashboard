@@ -1,43 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import { useEmployeeContext } from "@/context/EmployeeContext";
 import { Star } from "lucide-react";
 import * as Tabs from "@radix-ui/react-tabs";
-import Navbar from "@/components/Navbar"; 
-type Performance = {
-  year: number;
-  rating: number;
-};
-
-type User = {
-  id: string;
-  name: string;
-  address: string;
-  phone: string;
-  bio: string;
-  performance: Performance[];
-  projects: string[];
-  feedback: string[];
-};
-
-function getRandomPerformance() {
-  return Array.from({ length: 5 }, (_, i) => ({
-    year: 2019 + i,
-    rating: Math.floor(Math.random() * 5) + 1,
-  }));
-}
-
-const mockUser = (id: string): User => ({
-  id,
-  name: `Employee #${id}`,
-  address: "123 Main St, Cityville",
-  phone: "+91-9876543210",
-  bio: "Experienced team player with strong work ethic and excellent communication skills.",
-  performance: getRandomPerformance(),
-  projects: ["Project Alpha", "Project Beta", "Project Gamma"],
-  feedback: ["Great team member!", "Needs to improve punctuality", "Excellent problem-solving skills"],
-});
+import Navbar from "@/components/Navbar";
+import { useState } from "react";
+import EmployeeInfoCard from "@/components/EmployeeInfoCard";
 
 const StarRating = ({ rating }: { rating: number }) => (
   <div className="flex items-center gap-1">
@@ -53,41 +22,31 @@ const StarRating = ({ rating }: { rating: number }) => (
 );
 
 export default function EmployeeDetailPage() {
-  const params = useParams();
-  const [user, setUser] = useState<User | null>(null);
+  const { id } = useParams();
+  const { employees } = useEmployeeContext();
+  const user = employees.find((emp) => emp.id === id);
+
   const [activeTab, setActiveTab] = useState("overview");
 
-  useEffect(() => {
-    const id = params?.id?.toString() || "1";
-    setUser(mockUser(id));
-  }, [params]);
+  if (!user) return <div className="p-4">Loading employee...</div>;
 
-  if (!user) return <div className="p-4">Loading...</div>;
-
-  const avgRating = Math.round(user.performance.reduce((a, b) => a + b.rating, 0) / user.performance.length);
+  const avgRating =
+    user.performance?.length > 0
+      ? Math.round(user.performance.reduce((a, b) => a + b.rating, 0) / user.performance.length)
+      : 0;
 
   return (
     <div>
       <Navbar />
       <div className="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Left Card */}
-        <div className="bg-white shadow-lg rounded-2xl p-6 col-span-1">
-          <h1 className="text-2xl font-bold mb-2">{user.name}</h1>
-          <p className="text-sm text-gray-600 mb-4">{user.bio}</p>
-          <div className="mb-4">
-            <h2 className="font-semibold">📍 Address</h2>
-            <p className="text-gray-700">{user.address}</p>
-          </div>
-          <div className="mb-4">
-            <h2 className="font-semibold">📞 Phone</h2>
-            <p className="text-gray-700">{user.phone}</p>
-          </div>
-          <div>
-            <h2 className="font-semibold">⭐ Avg Rating</h2>
-            <StarRating rating={avgRating} />
-          </div>
-        </div>
-
+        <EmployeeInfoCard
+          name={user.name}
+          bio={user.bio}
+          address={user.address}
+          phone={user.phone}
+          avgRating={avgRating}
+        />
         {/* Right Tabs */}
         <div className="col-span-1 md:col-span-2">
           <Tabs.Root value={activeTab} onValueChange={setActiveTab}>

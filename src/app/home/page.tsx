@@ -1,78 +1,38 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import EmpCard from "@/components/EmpCard";
 import FilterSection from "@/components/FilterSection";
-import { useState } from "react";
-import { Bookmark } from "lucide-react";
-
-const employees = [
-  {
-    name: "Alice Carter",
-    email: "alice.carter@example.com",
-    age: 28,
-    department: "Finance",
-    rating: 4,
-    avatar: "https://randomuser.me/api/portraits/women/44.jpg",
-    bookmark:false,
-  },
-  {
-    name: "Ravi Singh",
-    email: "ravi.singh@example.com",
-    age: 33,
-    department: "Engineering",
-    rating: 5,
-    avatar: "https://randomuser.me/api/portraits/men/76.jpg",
-    bookmark:false,
-
-  },
-  {
-    name: "Maria Lopez",
-    email: "maria.lopez@example.com",
-    age: 26,
-    department: "HR",
-    rating: 3,
-    avatar: "https://randomuser.me/api/portraits/women/55.jpg",
-    bookmark:false,
-
-  },
-  {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    age: 31,
-    department: "Sales",
-    rating: 4,
-    avatar: "https://randomuser.me/api/portraits/men/65.jpg",
-    bookmark:false,
-
-  },
-  {
-    name: "Sarah Ahmed",
-    email: "sarah.ahmed@example.com",
-    age: 29,
-    department: "Marketing",
-    rating: 2,
-    avatar: "https://randomuser.me/api/portraits/women/62.jpg",
-    bookmark:false,
-
-  },
-  {
-    name: "Dev Patel",
-    email: "dev.patel@example.com",
-    age: 35,
-    department: "Engineering",
-    rating: 5,
-    avatar: "https://randomuser.me/api/portraits/men/52.jpg",
-    bookmark:false,
-
-  },
-];
+import { useEmployeeContext } from "@/context/EmployeeContext";
 
 const departments = ["Engineering", "Marketing", "HR", "Finance", "Sales"];
 
 export default function Home() {
+  const { employees, setEmployees } = useEmployeeContext();
   const [query, setQuery] = useState("");
   const [filters, setFilters] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchEmployees = async () => {
+      try {
+        const res = await fetch("/api/get-employee-data");
+        if (!res.ok) throw new Error("Failed to fetch employee data");
+        const data = await res.json();
+        setEmployees(data); // 💾 store in context
+      } catch (err: any) {
+        setError(err.message || "Something went wrong");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    // fetch only if not already populated
+    if (employees.length === 0) fetchEmployees();
+    else setLoading(false);
+  }, [employees.length, setEmployees]);
 
   const filteredEmployees = employees.filter((emp) => {
     const matchesSearch =
@@ -105,15 +65,21 @@ export default function Home() {
           {/* Employee Card Area */}
           <div className="w-full md:w-2/3 bg-slate-50 rounded-xl shadow-inner p-6 border border-gray-200">
             <h2 className="text-xl font-semibold mb-4 text-gray-800">Employee List</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
-              {filteredEmployees.length > 0 ? (
-                filteredEmployees.map((emp, idx) => (
-                  <EmpCard key={idx} {...emp} />
-                ))
-              ) : (
-                <p className="text-gray-500">No employees match your filters.</p>
-              )}
-            </div>
+            {loading ? (
+              <p className="text-gray-500">Loading employees...</p>
+            ) : error ? (
+              <p className="text-red-500">Error: {error}</p>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+                {filteredEmployees.length > 0 ? (
+                  filteredEmployees.map((emp) => (
+                    <EmpCard key={emp.id} {...emp} />
+                  ))
+                ) : (
+                  <p className="text-gray-500">No employees match your filters.</p>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>

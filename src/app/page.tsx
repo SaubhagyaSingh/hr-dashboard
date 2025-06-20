@@ -13,7 +13,7 @@ const images = [
 export default function Home() {
   return (
     <div className="bg-white text-zinc-900 min-h-screen">
-      <Navbar />
+      <Navbar/>
 
       <main className="w-full px-4 md:px-6 py-36 flex flex-col md:flex-row items-center justify-center gap-12">
         {/* Carousel Left */}
