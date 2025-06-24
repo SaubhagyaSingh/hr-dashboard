@@ -60,7 +60,7 @@ hr-dashboard/
 🔧 Installation & Setup
 
 Clone the repository:
-git clone https://github.com/your-username/hr-dashboard.git
+git clone https://github.com/SaubhagyaSingh/hr-dashboard.git
 cd hr-dashboard
 
 
